@@ -2,7 +2,10 @@ import React from 'react';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Display from './weatherDisplay';
 
-const API_KEY = process.env.REACT_APP_API_KEY
+require('dotenv').config();
+
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 const UNITS = "Metric";
 const LANG = "ru";
 
