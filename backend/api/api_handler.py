@@ -8,11 +8,10 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 
 
-#
 def weather_get(API_KEY, city):
     weather = json.loads(
         requests.get(
-            f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric').content.decode(
+            f'http://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={API_KEY}&units=metric').content.decode(
             'utf-8'))
 
     data = {
@@ -31,4 +30,4 @@ def weather_get(API_KEY, city):
     return data
 
 
-print(weather_get(API_KEY, 'Moscow')) # test
+print(weather_get(API_KEY, 'Moscow'))  # test
