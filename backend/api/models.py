@@ -25,7 +25,7 @@ class Weather(models.Model):
             'temperature': self.temperature,
             'weather_description': self.weather_description,
             'humidity': self.humidity,
-            'pressure': self.humidity,
+            'pressure': self.pressure,
             'wind': self.wind,
             'longitude': self.longitude,
             'latitude': self.latitude,
