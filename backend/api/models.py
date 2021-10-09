@@ -21,10 +21,11 @@ class Weather(models.Model):
     @property
     def to_dict(self):
         data = {
-            'id_city': self.id,
+            'id_city': self.id_city,
             'city': self.city,
             'country': self.country,
             'temperature': self.temperature,
+            'feels_like': self.feels_like,
             'weather_description': self.weather_description,
             'humidity': self.humidity,
             'pressure': self.pressure,
