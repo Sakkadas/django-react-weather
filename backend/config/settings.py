@@ -20,11 +20,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Third-pary
+    # Third-party
     'corsheaders',
     'rest_framework',
 
     # Local
+    'api',
+
 ]
 
 MIDDLEWARE = [
