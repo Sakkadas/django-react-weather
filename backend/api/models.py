@@ -6,6 +6,7 @@ class Weather(models.Model):
     city = models.CharField(max_length=120)
     country = models.TextField(max_length=50)
     temperature = models.IntegerField(default=0)
+    feels_like = models.IntegerField(default=0)
     weather_description = models.CharField(max_length=120)
     humidity = models.IntegerField(default=0)
     pressure = models.IntegerField(default=0)
