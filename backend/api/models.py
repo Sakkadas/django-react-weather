@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Weather(models.Model):
-    id = models.CharField(max_length=20)
+    id_city = models.CharField(max_length=20)
     city = models.CharField(max_length=120)
     country = models.TextField(max_length=50)
     temperature = models.IntegerField(default=0)
@@ -13,6 +13,7 @@ class Weather(models.Model):
     wind = models.IntegerField(default=0)
     longitude = models.CharField(max_length=20)
     latitude = models.CharField(max_length=20)
+    weather_icon = models.CharField(max_length=6)
 
     def __str__(self):
         return self.city
@@ -20,7 +21,7 @@ class Weather(models.Model):
     @property
     def to_dict(self):
         data = {
-            'id': self.id,
+            'id_city': self.id,
             'city': self.city,
             'country': self.country,
             'temperature': self.temperature,
@@ -30,5 +31,6 @@ class Weather(models.Model):
             'wind': self.wind,
             'longitude': self.longitude,
             'latitude': self.latitude,
+            'weather_icon': self.weather_icon,
         }
         return data

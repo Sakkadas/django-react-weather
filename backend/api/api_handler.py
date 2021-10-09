@@ -14,6 +14,8 @@ def weather_get(API_KEY, city):
             f'http://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={API_KEY}&units=metric').content.decode(
             'utf-8'))
 
+    city_name = weather['name']
+
     data = {
         'id': weather['id'],
         'city': city,
@@ -26,8 +28,9 @@ def weather_get(API_KEY, city):
         'wind': weather['wind'],
         'longitude': weather['coord']['lon'],
         'latitude': weather['coord']['lat'],
+        'weather_icon': weather['weather'][0]['icon'],
     }
-    return data
+    return weather
 
 
 print(weather_get(API_KEY, 'Moscow'))  # test
