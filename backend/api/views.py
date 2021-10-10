@@ -1,3 +1,4 @@
+from rest_framework.decorators import api_view
 from .api_handler import weather_get
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -23,7 +24,15 @@ class GetWeather(APIView):
             weather.weather_icon = data['weather_icon']
 
             weather.save()
-
         r = Weather.objects.all()
         serializer = WeatherSerializer(r, many=True)
         return Response(serializer.data)
+
+
+class RemoveCity(APIView):
+    def post(self, request):
+        city_name = request.data['city']
+        city_to_delete = Weather.objects.filter(city=city_name)
+        for c in city_to_delete:
+            c.delete()
+        return Response(f'Deleted {city_name}.')
