@@ -1,3 +1,5 @@
+from rest_framework import status
+from rest_framework.decorators import api_view
 from .api_handler import weather_get
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -21,9 +23,28 @@ class GetWeather(APIView):
             weather.longitude = data['longitude']
             weather.latitude = data['latitude']
             weather.weather_icon = data['weather_icon']
-
             weather.save()
-
         r = Weather.objects.all()
         serializer = WeatherSerializer(r, many=True)
         return Response(serializer.data)
+
+
+class RemoveCity(APIView):
+    def post(self, request):
+        city_name = request.data['city']
+        city_to_delete = Weather.objects.filter(city=city_name)
+        for c in city_to_delete:
+            c.delete()
+        return Response(f'Deleted {city_name}.')
+
+
+class Add(APIView):
+    def post(self, request):
+        serializer = WeatherSerializer(data=self.request.data)
+        city_name = request.data['city']
+        if serializer.is_valid():
+            serializer.save()
+            serializer.data.get(city_name)
+            message = 'Success'
+            return Response({'message': message})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
