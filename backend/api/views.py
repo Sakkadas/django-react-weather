@@ -1,5 +1,4 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
 from .api_handler import weather_get
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -42,6 +41,10 @@ class Add(APIView):
     def post(self, request):
         serializer = WeatherSerializer(data=self.request.data)
         city_name = request.data['city']
+
+        if len(Weather.objects.filter(city=city_name)) > 0:
+            return Response(f'{city_name} already in the API.')
+
         if serializer.is_valid():
             serializer.save()
             serializer.data.get(city_name)
