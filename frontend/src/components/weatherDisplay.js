@@ -41,8 +41,9 @@ function handleRemoveClick(city_name) {
 const WeatherDisplay = (props) => {
     const UNSPLASH_API_KEY = process.env.UNSPLASH_API_KEY
 
-    const Unsplash_url = `https://api.unsplash.com/search/photos?query=${props.city.city}&client_id=${UNSPLASH_API_KEY}`
-
+    const Unsplash_url = `https://api.unsplash.com/search/photos?query=${props.city.city}&client_id=` +
+        UNSPLASH_API_KEY
+    console.log(UNSPLASH_API_KEY)
     const icon = props.city.weather_icon
     const iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
 
@@ -50,17 +51,14 @@ const WeatherDisplay = (props) => {
 
     useEffect(() =>
         axios.get(Unsplash_url).then((response) => {
+            setResult(response.data.results[0].urls.small)
             console.log(response)
-            setResult(response.data.results[0].urls.thumb)
-            // full, raw, regular, small, thumb
+            // json fields full, raw, regular, small, thumb
         }), [])
 
     return (
         <div>
-            <div>
-                <img src={result}></img>
-            </div>
-            <CardContent>
+            <CardContent style={{backgroundColor: "#f1f1f1"}}>
                 <Box display="flex" flexDirection="row">
                     <Box p={1}>
                         <Typography variant="h2" color="textPrimary">
@@ -75,6 +73,7 @@ const WeatherDisplay = (props) => {
             <CardContent>
                 <Box display="flex" flexDirection="row-reverse">
                     <Box p={0}>
+                        <img style={{width: "300"}} src={result}></img>
                         <Typography variant="h4" color="textPrimary">
                             Температура: {props.city.temperature}
                             <span>&#176;</span>
@@ -141,8 +140,6 @@ const WeatherDisplay = (props) => {
         </div>
     );
 }
-
-
 export default WeatherDisplay;
 
 
