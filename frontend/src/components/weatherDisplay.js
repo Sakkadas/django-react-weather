@@ -37,8 +37,7 @@ const WeatherIcon = styled.img`
 
 function handleRemoveClick(city_name) {
     axios.post("http://127.0.0.1:8000/api/remove/", {city: city_name})
-    let child = document.getElementById(city_name)
-
+    window.location = "http://localhost:3000/"
 }
 
 const WeatherDisplay = (props) => {
@@ -59,92 +58,92 @@ const WeatherDisplay = (props) => {
             // json fields full, raw, regular, small, thumb
         }), [])
 
-    return (
-        <div>
-            <CardContent style={{backgroundColor: "#f1f1f1"}}>
-                <Box display="flex" flexDirection="row">
-                    <Box p={1}>
-                        <Typography variant="h2" color="textPrimary">
-                            {props.city.city},{props.city.country}
-                        </Typography>
-                        <Typography variant="caption" color="textSecondary">
-                            {props.city.longitude}, {props.city.latitude}
-                        </Typography>
+    return (<React.Fragment>
+            <div>
+                <CardContent style={{backgroundColor: "#f1f1f1"}}>
+                    <Box display="flex" flexDirection="row">
+                        <Box p={1}>
+                            <Typography variant="h2" color="textPrimary">
+                                {props.city.city},{props.city.country}
+                            </Typography>
+                            <Typography variant="caption" color="textSecondary">
+                                {props.city.longitude}, {props.city.latitude}
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-            </CardContent>
-            <CardContent>
-                <Box display="flex" flexDirection="row-reverse">
-                    <Box p={0}>
-                        <img style={{width: "300"}} src={result}></img>
-                        <Typography variant="h4" color="textPrimary">
-                            Температура: {props.city.temperature}
-                            <span>&#176;</span>
-                            {"C"}
-                            <Typography variant="h6" color="textSecondary">
-                                Ощущается как {props.city.feels_like}
+                </CardContent>
+                <CardContent>
+                    <Box display="flex" flexDirection="row-reverse">
+                        <Box p={0}>
+                            <img style={{width: "300"}} src={result}></img>
+                            <Typography variant="h4" color="textPrimary">
+                                Температура: {props.city.temperature}
                                 <span>&#176;</span>
                                 {"C"}
+                                <Typography variant="h6" color="textSecondary">
+                                    Ощущается как {props.city.feels_like}
+                                    <span>&#176;</span>
+                                    {"C"}
+                                </Typography>
                             </Typography>
-                        </Typography>
+                        </Box>
                     </Box>
-                </Box>
-            </CardContent>
-            <CardContent>
-                <Box display="flex" flexDirection="row-reverse">
-                    <Box p={0}>
-                        <Typography variant="h4" color="textPrimary">
-                            <WeatherIcon src={iconUrl}/>
-                        </Typography>
+                </CardContent>
+                <CardContent>
+                    <Box display="flex" flexDirection="row-reverse">
+                        <Box p={0}>
+                            <Typography variant="h4" color="textPrimary">
+                                <WeatherIcon src={iconUrl}/>
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-            </CardContent>
-            <CardContent>
-                <Box display="flex" flexDirection="row-reverse">
-                    <Box p={0}>
-                        <Typography variant="h6" color="textSecondary">
-                            {props.city.weather_description}
-                        </Typography>
+                </CardContent>
+                <CardContent>
+                    <Box display="flex" flexDirection="row-reverse">
+                        <Box p={0}>
+                            <Typography variant="h6" color="textSecondary">
+                                {props.city.weather_description}
+                            </Typography>
+                        </Box>
                     </Box>
-                </Box>
-            </CardContent>
-            <CardContent>
-                <Box display="flex" flexDirection="row">
-                    <Box p={1}>
-                        <Typography variant="h6" color="textPrimary">
-                            Влажность: <b>{props.city.humidity}</b>%
-                            <hr/>
-                            <DropletIcon/>
-                        </Typography>
+                </CardContent>
+                <CardContent>
+                    <Box display="flex" flexDirection="row">
+                        <Box p={1}>
+                            <Typography variant="h6" color="textPrimary">
+                                Влажность: <b>{props.city.humidity}</b>%
+                                <hr/>
+                                <DropletIcon/>
+                            </Typography>
+                        </Box>
+                        <Box p={1}>
+                            <Typography variant="h6" color="textPrimary">
+                                Давление: <b>{props.city.pressure}</b> Па
+                                <hr/>
+                                <Timer2Icon/>
+                            </Typography>
+                        </Box>
+                        <Box p={1}>
+                            <Typography variant="h6" color="textPrimary">
+                                Ветер: <b>{props.city.wind}</b> км/ч
+                                <hr/>
+                                <WindicssIcon/>
+                            </Typography>
+                        </Box>
                     </Box>
-                    <Box p={1}>
-                        <Typography variant="h6" color="textPrimary">
-                            Давление: <b>{props.city.pressure}</b> Па
-                            <hr/>
-
-                            <Timer2Icon/>
-                        </Typography>
-                    </Box>
-                    <Box p={1}>
-                        <Typography variant="h6" color="textPrimary">
-                            Ветер: <b>{props.city.wind}</b> км/ч
-                            <hr/>
-                            <WindicssIcon/>
-                        </Typography>
-                    </Box>
-                </Box>
-            </CardContent>
-            <Button style={{backgroundColor: '#901B02', color: '#F1F1F1'}}
-                    type='submit'
-                    color="primary"
-                    variant="contained"
-                    onClick={() => {
-                        handleRemoveClick(props.city.city)
-                    }}>
-                Delete
-                <Delete style={{width: "20px"}}/>
-            </Button>
-        </div>
+                </CardContent>
+                <Button style={{backgroundColor: '#901B02', color: '#F1F1F1'}}
+                        type='submit'
+                        color="primary"
+                        variant="contained"
+                        onClick={() => {
+                            handleRemoveClick(props.city.city)
+                        }}>
+                    Delete
+                    <Delete style={{width: "20px"}}/>
+                </Button>
+            </div>
+        </React.Fragment>
     );
 }
 export default WeatherDisplay;

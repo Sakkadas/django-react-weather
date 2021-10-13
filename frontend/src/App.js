@@ -38,33 +38,32 @@ class App extends React.Component {
 
     render() {
         const classes = this.props;
-        return (
+        return (<React.Fragment>
+                <Grid style={{marginTop: "65px", backgroundColor:'#f1f1f1'}} container justify="center">
+                    <Card>
+                        <Typography style={{textAlign: 'center'}} variant="h4" component="h2">
+                            Прогноз погоды на сегодня
+                        </Typography>
+                        <br/>
 
-            <Grid style={{marginTop: "90px"}} container justify="center">
-                <Card>
-                    <Typography variant="h4" component="h2">
-                        Прогноз погоды на сегодня
-                    </Typography>
-                    <br/>
+                        <Input style={{width:'100%'}} type="text" name="location" id="city_target"
+                               placeholder="Город"/>
+                        <FormHelperText>Введите название города: (например: Москва или англ. Moscow)</FormHelperText>
 
-                    <Input type="text" name="location" id="city_target"
-                           placeholder="City"/>
-                    <FormHelperText>Введите название города: (например: Москва или англ. Moscow)</FormHelperText>
-
-                    <Button variant="outlined">
-                        <div onClick={this.handleClick}>Поиск</div>
-                    </Button>
-
-                    {this.state.cities.map((city) => {
-                        return <React.Fragment>
-                            <WeatherDisplay city={city}>
-                            </WeatherDisplay>
-                        </React.Fragment>
-                    })}
-
-
-                </Card>
-            </Grid>
+                        <Button variant="outlined">
+                            <div onClick={this.handleClick}>Поиск</div>
+                        </Button>
+                        {this.state.cities.map((city) => {
+                            return <React.Fragment>
+                                <article style={{margin:'15px'}}>
+                                    <WeatherDisplay city={city}>
+                                    </WeatherDisplay>
+                                </article>
+                            </React.Fragment>
+                        })}
+                    </Card>
+                </Grid>
+            </React.Fragment>
         )
     }
 }

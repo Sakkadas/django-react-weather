@@ -22,7 +22,7 @@ function Copyright() {
 
 export default function StickyFooter() {
     return (
-        <Box
+        <Box style={{backgroundColor:'#f1f1f1'}}
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
