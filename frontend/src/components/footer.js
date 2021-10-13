@@ -10,9 +10,9 @@ import {WeatherCloudy} from '@styled-icons/fluentui-system-regular/WeatherCloudy
 function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary">
-            {'Copyright © '}
+            {'Coded by '}
             <Link color="inherit" href="https://github.com/sakkadas">
-                <span style={{fontSize:'16px'}}><b>Sakkadas</b></span>
+                <span style={{fontSize: '16px'}}><b>Ilya Nesterov</b></span>
             </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -44,7 +44,9 @@ export default function StickyFooter() {
             >
                 <Container maxWidth="sm">
                     <Typography variant="body1">
-                       <span style={{fontSize:'18px'}}>My Django React Weather App.</span> <WeatherCloudy style={{width:'20%'}}/>
+                       <span style={{fontSize: '18px'}}>My Django React Weather App.
+
+                       </span> <WeatherCloudy style={{width: '18%'}}/>
                     </Typography>
                     <Copyright/>
                 </Container>
