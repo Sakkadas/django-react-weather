@@ -99,14 +99,14 @@ const WeatherDisplay = (props) => {
                 <Box display="flex" flexDirection="row">
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Влажность: {props.city.humidity}%
+                            Влажность: <b>{props.city.humidity}</b>%
                             <hr/>
                             <DropletIcon/>
                         </Typography>
                     </Box>
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Давление: {props.city.pressure} Па
+                            Давление: <b>{props.city.pressure}</b> Па
                             <hr/>
 
                             <Timer2Icon/>
@@ -114,7 +114,7 @@ const WeatherDisplay = (props) => {
                     </Box>
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Ветер: {props.city.wind}км/ч
+                            Ветер: <b>{props.city.wind}</b> км/ч
                             <hr/>
                             <WindicssIcon/>
                         </Typography>
