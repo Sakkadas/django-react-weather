@@ -40,7 +40,7 @@ class App extends React.Component {
         const classes = this.props;
         return (
 
-            <Grid container justify="center">
+            <Grid style={{marginTop: "90px"}} container justify="center">
                 <Card>
                     <Typography variant="h4" component="h2">
                         Прогноз погоды на сегодня
@@ -55,12 +55,12 @@ class App extends React.Component {
                         <div onClick={this.handleClick}>Поиск</div>
                     </Button>
 
-                        {this.state.cities.map((city) => {
-                            return <React.Fragment>
-                                <WeatherDisplay city={city}>
-                                </WeatherDisplay>
-                            </React.Fragment>
-                        })}
+                    {this.state.cities.map((city) => {
+                        return <React.Fragment>
+                            <WeatherDisplay city={city}>
+                            </WeatherDisplay>
+                        </React.Fragment>
+                    })}
 
 
                 </Card>
