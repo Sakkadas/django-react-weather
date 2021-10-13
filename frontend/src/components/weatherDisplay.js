@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +9,8 @@ import {Windicss} from '@styled-icons/simple-icons/Windicss'
 import {Droplet} from '@styled-icons/icomoon/Droplet'
 import {Timer2} from '@styled-icons/remix-line/Timer2'
 import Button from '@mui/material/Button';
+
+require('dotenv').config()
 
 const WindicssIcon = styled(Windicss)`
     justify: center;
@@ -26,13 +28,6 @@ const Timer2Icon = styled(Timer2)`
   height: 75px;
   width: 75px;
 `
-const windicssIcon = () => <WindicssIcon/>
-
-const dropletIcon = () => <DropletIcon/>
-
-const timer2Icon = () => <Timer2Icon/>
-
-
 const WeatherIcon = styled.img`
   display: block;
   height: 75px;
@@ -44,11 +39,27 @@ function handleRemoveClick(city_name) {
 }
 
 const WeatherDisplay = (props) => {
+    const UNSPLASH_API_KEY = process.env.UNSPLASH_API_KEY
+
+    const Unsplash_url = `https://api.unsplash.com/search/photos?query=${props.city.city}&client_id=${UNSPLASH_API_KEY}`
+
     const icon = props.city.weather_icon
     const iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
 
+    const [result, setResult] = useState([]);
+
+    useEffect(() =>
+        axios.get(Unsplash_url).then((response) => {
+            console.log(response)
+            setResult(response.data.results[0].urls.thumb)
+            // full, raw, regular, small, thumb
+        }), [])
+
     return (
         <div>
+            <div>
+                <img src={result}></img>
+            </div>
             <CardContent>
                 <Box display="flex" flexDirection="row">
                     <Box p={1}>
