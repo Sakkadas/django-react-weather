@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react';
+import axios from 'axios';
+
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import Box from "@material-ui/core/Box";
@@ -6,7 +8,7 @@ import styled from 'styled-components';
 import {Windicss} from '@styled-icons/simple-icons/Windicss'
 import {Droplet} from '@styled-icons/icomoon/Droplet'
 import {Timer2} from '@styled-icons/remix-line/Timer2'
-
+import Button from '@mui/material/Button';
 
 const WindicssIcon = styled(Windicss)`
     justify: center;
@@ -37,18 +39,12 @@ const WeatherIcon = styled.img`
   width: 75px;
 `;
 
-function Display({weatherReport}) {
-    const lon = weatherReport.coord.lon;
-    const lat = weatherReport.coord.lat;
-    const weatherDescription = weatherReport.weather[0].description;
-    const temp = weatherReport.main.temp;
-    const pressure = weatherReport.main.pressure;
-    const humidity = weatherReport.main.humidity;
-    const wind = weatherReport.wind.speed;
-    const country = weatherReport.sys.country;
-    const city = weatherReport.name;
+function handleRemoveClick(city_name) {
+    axios.post("http://127.0.0.1:8000/api/remove/", {city: city_name})
+}
 
-    const icon = weatherReport.weather[0].icon;
+const WeatherDisplay = (props) => {
+    const icon = props.city.weather_icon
     const iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
 
     return (
@@ -57,10 +53,10 @@ function Display({weatherReport}) {
                 <Box display="flex" flexDirection="row">
                     <Box p={1}>
                         <Typography variant="h2" color="textPrimary">
-                            {city},{country}
+                            {props.city.city},{props.city.country}
                         </Typography>
                         <Typography variant="caption" color="textSecondary">
-                            {lon}, {lat}
+                            {props.city.longitude}, {props.city.latitude}
                         </Typography>
                     </Box>
                 </Box>
@@ -69,9 +65,14 @@ function Display({weatherReport}) {
                 <Box display="flex" flexDirection="row-reverse">
                     <Box p={0}>
                         <Typography variant="h4" color="textPrimary">
-                            Температура: {temp}
+                            Температура: {props.city.temperature}
                             <span>&#176;</span>
                             {"C"}
+                            <Typography variant="h6" color="textSecondary">
+                                Ощущается как {props.city.feels_like}
+                                <span>&#176;</span>
+                                {"C"}
+                            </Typography>
                         </Typography>
                     </Box>
                 </Box>
@@ -89,7 +90,7 @@ function Display({weatherReport}) {
                 <Box display="flex" flexDirection="row-reverse">
                     <Box p={0}>
                         <Typography variant="h6" color="textSecondary">
-                            {weatherDescription}
+                            {props.city.weather_description}
                         </Typography>
                     </Box>
                 </Box>
@@ -98,27 +99,40 @@ function Display({weatherReport}) {
                 <Box display="flex" flexDirection="row">
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Влажность: {humidity}
-                            %
+                            Влажность: {props.city.humidity}%
+                            <hr/>
                             <DropletIcon/>
                         </Typography>
                     </Box>
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Давление: {pressure} Па
+                            Давление: {props.city.pressure} Па
+                            <hr/>
+
                             <Timer2Icon/>
                         </Typography>
                     </Box>
                     <Box p={1}>
                         <Typography variant="h6" color="textPrimary">
-                            Ветер: {wind} км/ч
+                            Ветер: {props.city.wind}км/ч
+                            <hr/>
                             <WindicssIcon/>
                         </Typography>
                     </Box>
                 </Box>
             </CardContent>
+            <Button>
+                <div onClick={() => {
+                    handleRemoveClick(props.city.city)
+                }}>Remove
+                </div>
+            </Button>
         </div>
     );
 }
 
-export default Display;
+
+export default WeatherDisplay;
+
+
+
