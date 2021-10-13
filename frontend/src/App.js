@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import {makeStyles} from "@material-ui/core/styles";
 
 import FormHelperText from '@mui/material/FormHelperText';
 import Typography from '@mui/material/Typography';
@@ -12,17 +11,6 @@ import Input from '@mui/material/Input';
 import WeatherDisplay from "./components/weatherDisplay";
 import Button from '@mui/material/Button';
 
-const style = makeStyles((theme) => ({
-    root: {
-        marginTop: 50,
-        display: "center",
-        width: 550,
-        height: 250,
-    },
-    cardcss: {
-        backgroundPosition: "center",
-    },
-}));
 
 class App extends React.Component {
     constructor(props) {
@@ -51,12 +39,9 @@ class App extends React.Component {
     render() {
         const classes = this.props;
         return (
-            <Grid className={classes.root} alignItems="center" container="justify">
-                <Card className={classes.cardcss}>
-                    {this.state.cities.map((city) => {
-                        return <WeatherDisplay city={city}/>
-                    })}
 
+            <Grid container justify="center">
+                <Card>
                     <Typography variant="h4" component="h2">
                         Прогноз погоды на сегодня
                     </Typography>
@@ -69,6 +54,14 @@ class App extends React.Component {
                     <Button variant="outlined">
                         <div onClick={this.handleClick}>Поиск</div>
                     </Button>
+
+                        {this.state.cities.map((city) => {
+                            return <React.Fragment>
+                                <WeatherDisplay city={city}>
+                                </WeatherDisplay>
+                            </React.Fragment>
+                        })}
+
 
                 </Card>
             </Grid>
