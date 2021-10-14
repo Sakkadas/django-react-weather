@@ -7,7 +7,7 @@ from .serializers import WeatherSerializer
 
 
 class GetWeather(APIView):
-    """Display all models weather forecasts"""
+    """Display all weather forecasts models"""
 
     def get(self, request):
         for weather in Weather.objects.all():
@@ -38,9 +38,10 @@ class RemoveCity(APIView):
     def post(self, request):
         city_name = request.data['city']
         city_to_delete = Weather.objects.filter(city=city_name)
+        message = F'City {city_name} was successfully deleted'
         for c in city_to_delete:
             c.delete()
-        return Response(f'Deleted {city_name}.')
+        return Response({'message': message})
 
 
 class Add(APIView):
@@ -61,6 +62,6 @@ class Add(APIView):
         if serializer.is_valid():
             serializer.save()
             serializer.data.get(city_name)
-            message = F'{city_name} successfully added'
+            message = F'City {city_name} was successfully added'
             return Response({'message': message})
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
