@@ -13,6 +13,12 @@ class Weather(models.Model):
     longitude = models.CharField(max_length=20, blank=True)
     latitude = models.CharField(max_length=20, blank=True)
     weather_icon = models.CharField(max_length=6, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return self.city
+
+    class Meta:
+        verbose_name_plural = 'Прогнозы погоды'
+        verbose_name = 'Прогноз погоды'
+        ordering = ['-created_at']
