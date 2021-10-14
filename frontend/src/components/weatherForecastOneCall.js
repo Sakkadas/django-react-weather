@@ -21,7 +21,7 @@ export default function WeatherForecastOneCall(props) {
     }
 
     function load() {
-        const REACT_APP_apiKeyUnsplash = 'process.env.REACT_APP_UNSPLASH_API_KEY';
+        const REACT_APP_apiKeyUnsplash = process.env.REACT_APP_API_KEY;
         const longitude = 37.6156;
         const latitude = 55.7522;
         const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}`
