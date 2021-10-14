@@ -39,14 +39,15 @@ class App extends React.Component {
     render() {
         const classes = this.props;
         return (<React.Fragment>
-                <Grid style={{marginTop: "65px", backgroundColor:'#f1f1f1'}} container justify="center">
+                <Grid style={{marginTop: "65px", backgroundColor: '#f1f1f1'}} container justify="center">
+
                     <Card>
                         <Typography style={{textAlign: 'center'}} variant="h4" component="h2">
                             Прогноз погоды на сегодня
                         </Typography>
                         <br/>
 
-                        <Input style={{width:'100%'}} type="text" name="location" id="city_target"
+                        <Input style={{width: '100%'}} type="text" name="location" id="city_target"
                                placeholder="Город"/>
                         <FormHelperText>Введите название города: (например: Москва или англ. Moscow)</FormHelperText>
 
@@ -55,7 +56,7 @@ class App extends React.Component {
                         </Button>
                         {this.state.cities.map((city) => {
                             return <React.Fragment>
-                                <article style={{margin:'15px'}}>
+                                <article style={{margin: '15px'}}>
                                     <WeatherDisplay city={city}>
                                     </WeatherDisplay>
                                 </article>
