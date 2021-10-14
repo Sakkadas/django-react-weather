@@ -11,28 +11,26 @@ import Button from '@mui/material/Button';
 
 import {Delete} from '@styled-icons/material-rounded/Delete';
 
+import WeatherForecastOneCall from "./weatherForecastOneCall";
+
 require('dotenv').config()
 
 const WindicssIcon = styled(Windicss)`
-    justify: center;
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
 `
 
 const DropletIcon = styled(Droplet)`
-    justify: center;
-  height: 75px;
-  width: 75px;  
+  height: 50px;
+  width: 50px;  
 `
 const Timer2Icon = styled(Timer2)`
-    justify: center;
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
 `
 const WeatherIcon = styled.img`
-  display: block;
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
 `;
 
 function handleRemoveClick(city_name) {
@@ -44,17 +42,15 @@ const WeatherDisplay = (props) => {
     const REACT_APP_apiKeyUnsplash = process.env.REACT_APP_UNSPLASH_API_KEY
     const Unsplash_url = `https://api.unsplash.com/search/photos?query=${props.city.city}&client_id=` +
         REACT_APP_apiKeyUnsplash
-    // UNSPLASH_API_KEY
-    console.log(REACT_APP_apiKeyUnsplash)
     const icon = props.city.weather_icon
     const iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
-
+    const [weatherData, setWeatherData] = useState({ready: false});
     const [result, setResult] = useState([]);
 
     useEffect(() =>
         axios.get(Unsplash_url).then((response) => {
             setResult(response.data.results[0].urls.small)
-            console.log(response)
+            // console.log(response)
             // json fields full, raw, regular, small, thumb
         }), [])
 
@@ -131,6 +127,7 @@ const WeatherDisplay = (props) => {
                             </Typography>
                         </Box>
                     </Box>
+                    <WeatherForecastOneCall coordinates={weatherData.coordinates}/>
                 </CardContent>
                 <Button style={{backgroundColor: '#901B02', color: '#F1F1F1'}}
                         type='submit'
