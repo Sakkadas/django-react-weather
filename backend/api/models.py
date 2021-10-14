@@ -13,23 +13,12 @@ class Weather(models.Model):
     longitude = models.CharField(max_length=20, blank=True)
     latitude = models.CharField(max_length=20, blank=True)
     weather_icon = models.CharField(max_length=6, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
 
     def __str__(self):
         return self.city
 
-    @property
-    def to_dict(self):
-        data = {
-            'city': self.city,
-            'country': self.country,
-            'temperature': self.temperature,
-            'feels_like': self.feels_like,
-            'weather_description': self.weather_description,
-            'humidity': self.humidity,
-            'pressure': self.pressure,
-            'wind': self.wind,
-            'longitude': self.longitude,
-            'latitude': self.latitude,
-            'weather_icon': self.weather_icon,
-        }
-        return data
+    class Meta:
+        verbose_name_plural = 'Прогнозы погоды'
+        verbose_name = 'Прогноз погоды'
+        ordering = ['-created_at']

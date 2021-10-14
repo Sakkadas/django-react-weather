@@ -14,10 +14,7 @@ def weather_get(city):
             f'http://api.openweathermap.org/data/2.5/weather?q={city}&lang=ru&appid={API_KEY}&units=metric').content.decode(
             'utf-8'))
 
-    city_name = weather['name']
-
     data = {
-        'id': weather['id'],
         'city': city,
         'country': weather['sys']['country'],
         'temperature': weather['main']['temp'],
