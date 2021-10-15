@@ -37,7 +37,6 @@ class App extends React.Component {
     };
 
     render() {
-        const classes = this.props;
         return (<React.Fragment>
                 <Grid style={{marginTop: "65px", backgroundColor: '#f1f1f1'}} container justify="center">
 

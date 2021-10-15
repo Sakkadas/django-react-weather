@@ -19,15 +19,12 @@ export default function WeatherForecastOneCall(props) {
         setForecast(response.data.daily);
         setIsLoad(true);
     }
-
     function load() {
         const REACT_APP_apiKeyUnsplash = process.env.REACT_APP_API_KEY;
-        const longitude = 37.6156;
-        const latitude = 55.7522;
+        const longitude = '23.3214'
+        const latitude = '43.4213'
         const apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}`
             +`&lon=${longitude}&appid=${REACT_APP_apiKeyUnsplash}&units=metric`;
-        // console.log(latitude)
-        // console.log(longitude)
         axios.get(apiUrl).then(handleResponse);
     }
 

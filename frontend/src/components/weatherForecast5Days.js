@@ -14,9 +14,7 @@ export default function WeatherForecast5Days(props) {
 
     function day() {
         let date = new Date(props.data.dt * 1000);
-        console.log(date, 'DATE!!!!')
         let day = date.getDay();
-
         let days = ["Вс.", "Пн.", "Вт.", "Ср.", "Чт.", "Пт.", "Сб."];
         return days[day];
     }
