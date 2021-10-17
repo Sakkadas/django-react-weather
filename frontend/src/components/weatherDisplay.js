@@ -120,7 +120,7 @@ const WeatherDisplay = (props) => {
                             </Typography>
                         </Box>
                     </Box>
-                    <WeatherForecastOneCall coordinates={weatherData.coordinates}/>
+                    <WeatherForecastOneCall />
                 </CardContent>
                 <Button style={{backgroundColor: '#901B02', color: '#F1F1F1'}}
                         type='submit'
